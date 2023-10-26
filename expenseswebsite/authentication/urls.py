@@ -1,7 +1,9 @@
-from .views import RegistationView
+from .views import RegistationView,UsernameValidationView
 from django.urls import path
+from django.views.decorators.csrf import csrf_exempt
 
 
 urlpatterns = [
-    path('register',RegistationView.as_view(),name='register')
+    path('register',RegistationView.as_view(),name="register"),
+    path('validate-username',csrf_exempt(UsernameValidationView.as_view()),name="validate-username")
 ]
