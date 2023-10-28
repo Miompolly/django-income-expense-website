@@ -19,10 +19,6 @@ class UsernameValidationView(View):
         return JsonResponse({'username_valid':True})
 
 
-        
-
-
-
 class RegistationView(View):
     def get(self,request):
         return render(request,'authentication/register.html')
