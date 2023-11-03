@@ -11,18 +11,28 @@
             <div class="card-title py-3">
                 <h4>Register for a free account</h4>
             </div>
-            <form action="" method="post" autComplete="on">
+            <form action="{% url 'register' %}" method="post" autComplete="on">
+                {% csrf_token %}
+                {% include "partials/_messages.html" %}
                 <div class="form-group my-3">
-                    <input type="text"  class="form-control  form-control-sm" name="username" id="usernameField" placeholder="Username" required>
+                    <input type="text"  class="form-control form-control-sm" value="{{fieldValues.username}}" name="username" id="usernameField" placeholder="Username" required>
                 </div>
+                <div class="invalid_feedback" style="display:none;color:red">
+
+                </div>
+                <p class="text-sm text-success usernameSuccessOutput"></p>
                 <div class="form-group my-3">
-                   <input type="email"  class="form-control form-control-sm" name="email" id="emailField" placeholder="Email" required>
+                   <input type="email"  class="form-control form-control-sm" value="{{fieldValues.email}}" name="email" id="emailField" placeholder="Email" required>
+                </div>
+                <div class="emailfeedbackArea" style="display:none;color:red">
+
                 </div>
                 <div class="form-group my-3">
                     <input type="password"  class="form-control form-control-sm" name="password" id="passwordField" placeholder="Password" required>
-                    <label style="float:right;font-size:10px;padding-top:5px;">SHOW</label>
+                    {% comment %} <label >SHOW</label> {% endcomment %}
+               <small class="float-right py-3 showPasswordToggle" style="cursor: pointer;font-weight:bold;float:right;font-size:10px;padding-top:5px;">SHOW</small>
                 </div>
-                <input type="submit" value="Register" class="btn btn-block btn-primary my-3 w-100">
+                <input type="submit" value="Register" class="btn btn-block btn-primary my-3 w-100 submitBtn">
             </form>
         </div>
         </div>
