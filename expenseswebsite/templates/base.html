@@ -120,12 +120,27 @@
     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
   </symbol>
 </svg>
+<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow justify-content-between" data-bs-theme="dark">
+  <div class="form-control text-white text-right border-0 bg-dark" style="font-size: 2rem;">H-Food-Delivery</div>
+  <div class="form-control text-white text-right border-0 bg-dark" style="position: relative; align-items: center; text-align: right; padding-right: 2rem;">
+    <label>
 
-<header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#">H-Food-Delivery</a>
-
-  <input type="search" id="form1" class="form-control" placeholder="Search here" aria-label="Search" />
+      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+        <path d="M8 0a4 4 0 0 1 4 4 4 4 0 0 1-4 4 4 4 0 0 1-4-4 4 4 0 0 1 4-4zm0 1.5a2.5 2.5 0 0 0-2.403 2.015 1.5 1.5 0 0 1 2.806 0A2.5 2.5 0 0 0 8 1.5zm0 11a6.5 6.5 0 0 0-6.403 5.015.5.5 0 0 0 .91.29 6 6 0 1 1 11.986 0 .5.5 0 0 0 .91-.29A6.5 6.5 0 0 0 8 12.5z"/>
+      </svg>
+      
+     <span style="padding-left:1rem;"> {{ user.username }}</span></label>
+    <label class="nav-item" style="padding-left:2rem">
+      <form action=" {% url 'logout' %}" method="post">
+        {% csrf_token %}
+      <input class="align-items-center gap-2 " type="submit" value="Logout" >
+      </form> 
+    
+    </label>
+  </div>
 </header>
+
+
 
 <div class="container-fluid">
   <div class="row">
