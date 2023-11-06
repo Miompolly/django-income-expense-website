@@ -4,19 +4,21 @@
 
 <div class="container py-3">
     {% include "partials/_messages.html" %}
-<h1> Expenses list</h1>
+    <div class="row">
+    <div class="col-md-9">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="">Expenses</a></li>
+          <li class="breadcrumb-item active" aria-current="page">My Expenses</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="col-md-2">
 
-<ul class="list-group">
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-<li class="list-group-item">Bought Beer</li>
-
-</ul>
+        <a href="{% url 'add-expenses' %}" class="btn btn-primary">Add Expense</a>
+    </div>
 </div>
+
+</div>
+
 {% endblock%}
