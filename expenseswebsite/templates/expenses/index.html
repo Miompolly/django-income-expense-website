@@ -30,7 +30,7 @@
           </tr>
       </thead>
       <tbody>
-          {% for expense in expenses%}
+          {% for expense in page_obj%}
           <tr>
             <td>{{ forloop.counter }}</td>
               <td>{{expense.amount}}</td>
@@ -43,6 +43,29 @@
          
       </tbody> 
   </table>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <div>
+          Showing page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </div>
+      </div>
+      <div class="col-md-2 d-flex gap-1">
+        {% if page_obj.has_previous %}
+        <div>
+          <a href="?page={{ page_obj.previous_page_number }}">&laquo; Previous</a>
+        </div>
+        {% endif %}
+        {% if page_obj.has_next %}
+        <div>
+          <a href="?page={{ page_obj.next_page_number }}">Next &raquo;</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  
+ 
   {% endif %}
 </div>
 
