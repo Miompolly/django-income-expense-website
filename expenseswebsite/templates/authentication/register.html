@@ -15,7 +15,7 @@
                 {% csrf_token %}
                 {% include "partials/_messages.html" %}
                 <div class="form-group my-3">
-                    <input type="text"  class="form-cont  rol form-control-sm" value="{{fieldValues.username}}" name="username" id="usernameField" placeholder="Username" required>
+                    <input type="text"  class="form-control form-control-sm" value="{{fieldValues.username}}" name="username" id="usernameField" placeholder="Username" required>
                 </div>
                 <div class="invalid_feedback" style="display:none;color:red">
 
@@ -35,6 +35,18 @@
                 <input type="submit" value="Register" class="btn btn-block btn-primary my-3 w-100 submitBtn">
             </form>
         </div>
+       
+            <div class="col-6 " style="margin-left:1rem;">
+                <span>Have an Account ?</span>
+                <a href="{% url 'login' %}" class="">Login</a>
+            </div>
+            <div class="col-6" style="margin-left:1rem;">
+                <span>Forgot password ?</span>
+                <a href="" class="">Reset</a>
+            </div>
+      
+        
+        
         </div>
 <div class="col-md-4"></div>
 </div>
