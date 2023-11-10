@@ -10,4 +10,8 @@ urlpatterns = [
     path('export-to-csv/', views.export_to_csv, name='export-to-csv'),
     path('export-to-excel/', views.export_to_excel, name='export-to-excel'),
     path('export-to-pdf/', views.export_to_pdf, name='export-to-pdf'),
+    path('expense_category_summary', views.expense_category_summary, name='expense_category_summary'),
+    path('stats', views.stats_view, name='stats'),
+     path('search-expenses/', views.search_expenses, name='search-expenses'),
+   
 ]

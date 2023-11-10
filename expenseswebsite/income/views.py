@@ -4,6 +4,9 @@ from django.contrib import messages
 from django.core.paginator import Paginator
 from .models import Income, Category
 from django.http import HttpResponse
+from django.http import JsonResponse
+import datetime
+
 
 from io import BytesIO
 from reportlab.pdfgen import canvas
@@ -171,3 +174,32 @@ def export_to_csv(request):
         writer.writerow([income.date, income.amount, income.category, income.description])
 
     return response
+
+def income_category_summary(request):
+    today =datetime.date.today()
+    six_months_ago = today - datetime.timedelta(days=30 * 6)
+    incomes = Income.objects.filter(owner=request.user, date__gte=six_months_ago, date__lte=today)
+    final_report = {}
+
+    def get_category(income):
+        return income.category 
+
+    category_list = list(set(map(get_category, incomes)))
+
+    def get_income_category_amount(category):
+        amount = 0
+        filtered_by_category = incomes.filter(category=category)
+
+        for item in filtered_by_category:
+            amount += item.amount
+
+        return amount
+
+    for x in incomes:
+        for y in category_list:
+            final_report[y] = get_income_category_amount(y)
+
+    return JsonResponse({'income_category_data': final_report}, safe=False)
+
+def stats_view2(request):
+    return render(request,'income/income_summary.html')

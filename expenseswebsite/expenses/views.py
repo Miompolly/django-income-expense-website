@@ -11,8 +11,29 @@ from reportlab.pdfgen import canvas
 from django.http import HttpResponse
 import openpyxl
 from openpyxl.utils import get_column_letter
+import json
+from django.http import JsonResponse
+import datetime
 
 
+def search_expenses(request):
+    if request.method == 'POST':
+        search_str = json.loads(request.body).get('searchText')
+        expenses = Expense.objects.filter(
+            owner=request.user,
+            amount__icontains=search_str,
+        ) | Expense.objects.filter(
+            owner=request.user,
+            date__icontains=search_str,
+        ) | Expense.objects.filter(
+            owner=request.user,
+            description__icontains=search_str,
+        ) | Expense.objects.filter(
+            owner=request.user,
+            category__icontains=search_str,
+        )
+        data = list(expenses.values())  # Convert QuerySet to a list
+        return JsonResponse(data, safe=False)
 
 @login_required(login_url='/authentication/login')
 def index(request):
@@ -174,6 +195,37 @@ def export_to_csv(request):
         writer.writerow([expense.date, expense.amount, expense.category, expense.description])
 
     return response
+
+
+def expense_category_summary(request):
+    today_date=datetime.date.today()
+    six_months_ago=today_date-datetime.timedelta(days=30*6)
+    expenses = Expense.objects.filter(owner=request.user, date__gte=six_months_ago, date__lte=today_date)
+    finalrep={}
+
+    def get_category(expense):
+        return expense.category
+    category_list=list(set(map(get_category,expenses)))
+
+
+    def get_expense_category_amount(category):
+        amount=0
+        filtered_by_category=expenses.filter(category=category)
+
+        for item in filtered_by_category:
+            amount+=item.amount
+        
+        return amount
+    
+    for x in expenses:
+        for y in category_list:
+            finalrep[y]=get_expense_category_amount(y)
+
+    return JsonResponse({'expense_category_data':finalrep},safe=False)
+
+def stats_view(request):
+    return render(request,'expenses/stats.html')
+
       
 
 
