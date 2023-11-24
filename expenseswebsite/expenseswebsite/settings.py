@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-_ee^v#9ds3yd-4eeei6%k$m(g12o)k+3w!s*=nhjde7(sa-_lx'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -165,7 +165,7 @@ EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
 EMAIL_HOST="smtp.gmail.com"
 EMAIL_PORT=465 
 
-
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 EMAIL_HOST_USER="57joel39@gmail.com"
 EMAIL_HOST_PASSWORD="oaxvkkrgqpdwpzfe"
 DEFAULT_FROM_EMAIL="57joel39@gmail.com"
